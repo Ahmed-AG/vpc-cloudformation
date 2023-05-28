@@ -16,10 +16,10 @@ pipeline {
                 sh "/bin/bash /bin/cfn-nag-junit.sh cfn_nag_report.json"    
                 archiveArtifacts "cfn_nag_report.json"
                 sh "ls -l"
-                // xunit(
-                //     tools: [JUnit(pattern: 'cfn_nag_junit.xml')],
-                //     thresholds: [failed(failureThreshold: '30', unstableThreshold: '5')]
-                //     )
+                xunit(
+                    tools: [JUnit(pattern: 'cfn_nag_junit.xml')],
+                    thresholds: [failed(failureThreshold: '30', unstableThreshold: '30')]
+                    )
             }
         }
         stage('Build') {
