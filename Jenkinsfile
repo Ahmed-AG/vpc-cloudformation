@@ -16,7 +16,7 @@ pipeline {
                 sh "/bin/bash /bin/cfn-nag-junit.sh cfn_nag_report.json"    
                 archiveArtifacts "cfn_nag_report.json"
                 sh "ls -l"
-                junit cfn_nag_junit.xml
+                junit "cfn_nag_junit.xml"
                 // xunit(
                 //     tools: [JUnit(pattern: 'cfn_nag_junit.xml')],
                 //     thresholds: [failed(failureThreshold: '30', unstableThreshold: '30')]
