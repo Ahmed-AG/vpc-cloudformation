@@ -21,12 +21,13 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'AWS_ACCESS_KEY'),string(credentialsId: 'AWS_SECRET_KEY', variable: 'AWS_SECRET_KEY')]) {
-                    sh "echo $AWS_ACCESS_KEY|base64"
-                    sh "echo $AWS_SECRET_KEY|base64"
                     sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY"
                     sh "aws configure set aws_secret_access_key $AWS_SECRET_KEY"
                     sh "aws configure set region us-east-1" //hard coded region
                     sh "aws sts get-caller-identity"
+                    
+                    // Deploy the infrastructure  
+                    sh "aws cloudformation deploy --stack-name my-demo-stack --template-file main.yaml"
                 }
             }
         }
