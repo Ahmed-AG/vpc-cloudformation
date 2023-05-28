@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building... V4'
+                echo 'Building... V5'
                 // Add your build commands here
             }
         }
