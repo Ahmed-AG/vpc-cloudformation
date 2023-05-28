@@ -18,21 +18,21 @@ pipeline {
                 junit "cfn_nag_junit.xml"
             }
         }
-        stage('Build') {
+        stage('Deploy Infrastructure') {
             steps {
                 echo 'Building... V5'
                 // Add your build commands here
             }
         }
         
-        stage('Test') {
+        stage('Dynamic Scanning') {
             steps {
                 echo 'Running tests...'
                 // Add your test commands here
             }
         }
         
-        stage('Deploy') {
+        stage('Post Deployment') {
             steps {
                 echo 'Deploying...'
                 // Add your deployment commands here
