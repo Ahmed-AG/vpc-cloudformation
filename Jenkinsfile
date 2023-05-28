@@ -10,6 +10,12 @@ pipeline {
                 // Add your build commands here
             }
         }
+        stage('Static Analysis') {
+            steps {
+                sh 'cfn_nag_scan *.yaml'
+                // Add your build commands here
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building... V5'
