@@ -18,10 +18,11 @@ pipeline {
                 junit "cfn_nag_junit.xml"
             }
         }
-        stage('Deploy Infrastructure') {
+        stage('Deploy Application') {
             steps {
-                echo 'Building... V5'
-                // Add your build commands here
+                withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'AWS_ACCESS_KEY')]) {
+                    sh "echo $AWS_ACCESS_KEY"
+                }
             }
         }
         
