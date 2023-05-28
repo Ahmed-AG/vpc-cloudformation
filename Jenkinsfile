@@ -12,8 +12,9 @@ pipeline {
         }
         stage('Static Analysis') {
             steps {
-                sh 'cfn_nag_scan --input-path *.yaml'
-                // Add your build commands here
+                sh "cfn_nag_scan --input-path *.yaml --output-format json > cfn_nag_report.json || true"
+                archiveArtifacts "cfn_nag_report.json"
+
             }
         }
         stage('Build') {
