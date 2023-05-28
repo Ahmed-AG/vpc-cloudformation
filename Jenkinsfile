@@ -13,7 +13,7 @@ pipeline {
         stage('Static Analysis') {
             steps {
                 sh "cfn_nag_scan --input-path *.yaml --output-format json > cfn_nag_report.json || true"
-                sh "/bin/bash ./build/bin/cfn-nag-junit.sh cfn_nag_report.json"    
+                sh "/bin/bash /bin/cfn-nag-junit.sh cfn_nag_report.json"    
                 archiveArtifacts "cfn_nag_report.json"
                 xunit(
                     tools: [JUnit(pattern: 'cfn_nag_junit.xml')],
