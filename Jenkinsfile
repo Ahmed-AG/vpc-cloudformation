@@ -2,6 +2,12 @@ pipeline {
     agent any
     
     stages {
+        stage('Pre-Build') {
+            steps {
+                aws --version
+                // Add your build commands here
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building... V5'
