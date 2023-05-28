@@ -2,12 +2,11 @@ pipeline {
     agent any
     
     stages {
-        stage('Pre-Build') {
+        stage('Check Tools') {
             steps {
                 sh "aws --version"
                 sh "cfn_nag_scan  --version"
                 sh "python3 /sqlmap/sqlmap.py"
-                // Add your build commands here
             }
         }
         stage('Static Analysis') {
@@ -24,7 +23,8 @@ pipeline {
                     sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY"
                     sh "aws configure set aws_secret_access_key $AWS_SECRET_KEY"
                     sh "aws configure set region us-east-2" //hard coded region
-                    sh "aws sts get-caller-identity"
+                    sh "user=$(aws sts get-caller-identity | grep user | cut -d'/' -f2)"
+                    sh "echo $user"
                     
                     // Deploy the infrastructure  
                     sh "aws cloudformation deploy --stack-name my-demo-stack --template-file main.yaml --parameter-overrides Region=us-east-2"
@@ -35,14 +35,12 @@ pipeline {
         stage('Dynamic Scanning') {
             steps {
                 echo 'Running tests...'
-                // Add your test commands here
             }
         }
         
         stage('Post Deployment') {
             steps {
                 echo 'Deploying...'
-                // Add your deployment commands here
             }
         }
     }
