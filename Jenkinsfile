@@ -5,6 +5,8 @@ pipeline {
         stage('Pre-Build') {
             steps {
                 sh "aws --version"
+                sh "cfn_nag_scan  --version"
+                sh "python3 /sqlmap/sqlmap.py"
                 // Add your build commands here
             }
         }
