@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Pre-Build') {
             steps {
-                aws --version
+                sh "aws --version"
                 // Add your build commands here
             }
         }
