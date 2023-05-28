@@ -21,8 +21,7 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'AWS_ACCESS_KEY')]) {
-                    sh "echo $AWS_ACCESS_KEY>/tmp/secret"
-                    sh "cat /tmp/secret"
+                    sh "echo $AWS_ACCESS_KEY|base64"
                 }
             }
         }
