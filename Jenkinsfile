@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Static Analysis') {
             steps {
-                sh 'cfn_nag_scan *.yaml'
+                sh 'cfn_nag_scan --input-path *.yaml'
                 // Add your build commands here
             }
         }
