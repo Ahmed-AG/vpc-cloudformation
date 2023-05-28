@@ -23,8 +23,7 @@ pipeline {
                     sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY"
                     sh "aws configure set aws_secret_access_key $AWS_SECRET_KEY"
                     sh "aws configure set region us-east-2" //hard coded region
-                    sh 'user=$(aws sts get-caller-identity | grep user | cut -d\'/\' -f2)'
-                    sh 'echo "Logged in user: $user"'
+                    sh 'LoggedInAs=$(aws sts get-caller-identity | grep user | cut -d\'/\' -f2)'
                     
                     // Deploy the infrastructure  
                     sh "aws cloudformation deploy --stack-name my-demo-stack --template-file main.yaml --parameter-overrides Region=us-east-2"
