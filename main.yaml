@@ -17,7 +17,7 @@ Parameters:
     Type: String
 
   PrivateSubnetCIDR:
-    Default: 10.0.2.0/24
+    Default: 10.0.3.0/24
     Description: IP range for private subnet
     Type: String
 

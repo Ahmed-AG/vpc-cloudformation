@@ -26,7 +26,7 @@ pipeline {
                     sh 'LoggedInAs=$(aws sts get-caller-identity | grep user | cut -d\'/\' -f2)'
                     
                     // Deploy the infrastructure  
-                    sh "aws cloudformation deploy --stack-name my-demo-stack --template-file main.yaml --parameter-overrides Region=us-east-2"
+                    sh "bin/deploy_cfn.sh"
                 }
             }
         }
