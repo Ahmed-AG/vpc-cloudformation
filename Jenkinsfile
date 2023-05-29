@@ -17,7 +17,7 @@ pipeline {
                 junit "cfn_nag_junit.xml"
             }
         }
-        stage('Deploy Application') {
+        stage('Deploy Infrastructure') {
             steps {
                 withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'AWS_ACCESS_KEY'),string(credentialsId: 'AWS_SECRET_KEY', variable: 'AWS_SECRET_KEY')]) {
                     sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY"
@@ -30,7 +30,13 @@ pipeline {
                 }
             }
         }
-        
+
+        stage('Deploy Application') {
+            steps {
+                echo 'RunningAnsible...'
+            }
+        }
+
         stage('Dynamic Scanning') {
             steps {
                 echo 'Running tests...'
