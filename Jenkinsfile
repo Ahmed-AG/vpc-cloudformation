@@ -46,7 +46,16 @@ pipeline {
 
         stage('Dynamic Scanning') {
             steps {
-                echo 'Running tests...'
+                withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'AWS_ACCESS_KEY'),string(credentialsId: 'AWS_SECRET_KEY', variable: 'AWS_SECRET_KEY')]) {
+                    sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY"
+                    sh "aws configure set aws_secret_access_key $AWS_SECRET_KEY"
+                    sh "aws configure set region us-east-2" //hard coded region
+                    
+                    // Run Dymanic Scan  
+                    sh "perl /nikto/nikto-master/program/nikto.pl -h \$(aws cloudformation describe-stacks --stack-name my-demostack --query 'Stacks[0].Outputs' |jq -r '.[].OutputValue') -p 80 -output nikto-out.txt -root /WebGoat/login"
+                    // Save output
+                    archiveArtifacts "nikto-out.txt"
+                }
             }
         }
         
