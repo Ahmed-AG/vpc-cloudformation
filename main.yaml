@@ -146,6 +146,7 @@ Resources:
   WebServerSSG:
     Type: AWS::EC2::SecurityGroup
     Properties:
+      VpcId: !Ref VPC
       GroupDescription: Security group for SSH and HTTP access
       SecurityGroupIngress:
         - IpProtocol: tcp
