@@ -41,6 +41,7 @@ pipeline {
                     // Test the Application  
                     sh "WebServerIP=aws cloudformation describe-stacks --stack-name my-demostack --query 'Stacks[0].Outputs' |jq -r '.[].OutputValue'"
                     sh "curl -s http://\$WebServerIP:8080/WebGoat/login |grep /WebGoat/login"
+                }
             }
         }
 
