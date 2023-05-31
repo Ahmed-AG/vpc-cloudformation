@@ -3,8 +3,10 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: This template creates two public and private subnets within a VPC
 
 Parameters:
-  Region:
-    Type: String
+  # Region:
+    # Type: String
+    AdminIPAddress:
+      Type: String
 
   VpcCIDR:
     Default: 10.0.0.0/16
@@ -141,3 +143,32 @@ Resources:
     Properties:
       RouteTableId: !Ref PrivateRouteTable
       SubnetId: !Ref PrivateSubnet
+
+
+  WebServerSSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for SSH and HTTP access
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref $AdminIPAddress
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: Ref $AdminIPAddress
+
+  WebServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0a606d8395a538502
+      InstanceType: t2.micro
+      KeyName: demo-key-aag
+      SecurityGroupIds:
+        - !Ref WebServerSSG 
+      SubnetId: !Ref PublicSubnet
+      UserData: |
+        #!/bin/bash
+        echo "Hello, CloudFormation!" > /home/ubuntu/welcome.txt
+

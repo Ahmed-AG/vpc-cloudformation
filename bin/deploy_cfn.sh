@@ -7,7 +7,8 @@ REGION="us-east-2"
 # CloudFormation stack details
 STACK_NAME="my-demostack"
 TEMPLATE_FILE="main.yaml"
-PARAMETERS="Region=us-east-2"
+
+PARAMETERS="AdminIPAddress=$(curl https://ipinfo.io/ip)"
 CAPABILITIES="CAPABILITY_IAM"
 
 # Check if stack exists
