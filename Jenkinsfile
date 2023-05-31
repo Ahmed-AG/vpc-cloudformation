@@ -31,9 +31,16 @@ pipeline {
             }
         }
 
-        stage('Deploy Application') {
+        stage('Test Application') {
             steps {
-                echo 'RunningAnsible...'
+                withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'AWS_ACCESS_KEY'),string(credentialsId: 'AWS_SECRET_KEY', variable: 'AWS_SECRET_KEY')]) {
+                    sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY"
+                    sh "aws configure set aws_secret_access_key $AWS_SECRET_KEY"
+                    sh "aws configure set region us-east-2" //hard coded region
+                    
+                    // Test the Application  
+                    sh "WebServerIP=aws cloudformation describe-stacks --stack-name my-demostack --query 'Stacks[0].Outputs' |jq -r '.[].OutputValue'"
+                    sh "curl -s http://\$WebServerIP:8080/WebGoat/login |grep /WebGoat/login"
             }
         }
 

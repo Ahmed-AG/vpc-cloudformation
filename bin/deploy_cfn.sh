@@ -1,4 +1,3 @@
-# Written by ChatPGT
 #!/bin/bash
 AdminIPAddress=$1
 # AWS CLI profile and region
