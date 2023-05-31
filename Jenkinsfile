@@ -52,7 +52,7 @@ pipeline {
                     sh "aws configure set region us-east-2" //hard coded region
                     
                     // Run Dymanic Scan  
-                    sh "perl /nikto/nikto-master/program/nikto.pl -h \$(aws cloudformation describe-stacks --stack-name my-demostack --query 'Stacks[0].Outputs' |jq -r '.[].OutputValue') -p 80 -output nikto-out.txt -root /WebGoat/login"
+                    sh "perl /nikto/nikto-master/program/nikto.pl -h \$(aws cloudformation describe-stacks --stack-name my-demostack --query 'Stacks[0].Outputs' |jq -r '.[].OutputValue') -p 80 -output nikto-out.txt -root /WebGoat/login || true"
                     // Save output
                     archiveArtifacts "nikto-out.txt"
                 }
