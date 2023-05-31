@@ -26,7 +26,8 @@ pipeline {
                     sh 'LoggedInAs=$(aws sts get-caller-identity | grep user | cut -d\'/\' -f2)'
                     
                     // Deploy the infrastructure  
-                    sh "bash bin/deploy_cfn.sh $(curl -s https://ipinfo.io/ip)/32"
+                    sh "ADMINIP=$(curl -s ipinfo.io/ip)"
+                    sh "bash bin/deploy_cfn.sh $ADMINIP"
                 }
             }
         }
