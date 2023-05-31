@@ -168,7 +168,7 @@ Resources:
       SecurityGroupIds:
         - !Ref WebServerSSG 
       SubnetId: !Ref PublicSubnet
-      UserData: |
-        #!/bin/bash
-        echo "Hello, CloudFormation!" > /home/ubuntu/welcome.txt
+      # UserData: |
+      #   #!/bin/bash
+      #   echo "Hello, CloudFormation!" > /home/ubuntu/welcome.txt
 
