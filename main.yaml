@@ -175,7 +175,7 @@ Resources:
         Fn::Base64: 
           !Sub |
             #!/bin/bash
-            echo "Hello, CloudFormation!" > /home/ec2-user/welcome.txt
+            echo "Hello, CloudFormation!" > /welcome.txt
             yum install docker -y
             systemctl enable docker.service
             systemctl start docker.service
