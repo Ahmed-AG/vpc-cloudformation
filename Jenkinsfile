@@ -14,7 +14,7 @@ pipeline {
                 sh "cfn_nag_scan --input-path *.yaml --output-format json > cfn_nag_report.json || true"
                 sh "/bin/bash /bin/cfn-nag-junit.sh cfn_nag_report.json"    
                 archiveArtifacts "cfn_nag_report.json"
-                // junit "cfn_nag_junit.xml"
+                junit "cfn_nag_junit.xml"
             }
         }
         stage('Deploy Infrastructure') {
