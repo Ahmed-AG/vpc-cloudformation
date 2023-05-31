@@ -39,7 +39,7 @@ pipeline {
                     sh "aws configure set region us-east-2" //hard coded region
                     
                     // Test the Application  
-                    sh "curl -s http://\$(aws cloudformation describe-stacks --stack-name my-demostack --query 'Stacks[0].Outputs' |jq -r '.[].OutputValue'):8080/WebGoat/login |grep /WebGoat/login"
+                    sh "curl -s http://\$(aws cloudformation describe-stacks --stack-name my-demostack --query 'Stacks[0].Outputs' |jq -r '.[].OutputValue')/WebGoat/login | grep /WebGoat/login"
                 }
             }
         }
