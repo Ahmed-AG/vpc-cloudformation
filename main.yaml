@@ -142,7 +142,6 @@ Resources:
       RouteTableId: !Ref PrivateRouteTable
       SubnetId: !Ref PrivateSubnet
 
-
   WebServerSSG:
     Type: AWS::EC2::SecurityGroup
     Properties:

@@ -1,9 +1,8 @@
 # Written by ChatPGT
 #!/bin/bash
-AdminIPAddress = $1
+AdminIPAddress=$1
 # AWS CLI profile and region
 REGION="us-east-2"
-AdminIPAddress = $1
 # CloudFormation stack details
 STACK_NAME="my-demostack"
 TEMPLATE_FILE="main.yaml"
