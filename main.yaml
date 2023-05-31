@@ -3,8 +3,6 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: This template creates two public and private subnets within a VPC
 
 Parameters:
-  # Region:
-    # Type: String
   AdminIPAddress:
     Type: String
 
@@ -153,11 +151,11 @@ Resources:
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
-          CidrIp: !Ref $AdminIPAddress
+          CidrIp: !Ref AdminIPAddress
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
-          CidrIp: Ref $AdminIPAddress
+          CidrIp: Ref AdminIPAddress
 
   WebServer:
     Type: AWS::EC2::Instance
