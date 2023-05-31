@@ -5,8 +5,8 @@ Description: This template creates two public and private subnets within a VPC
 Parameters:
   # Region:
     # Type: String
-    AdminIPAddress:
-      Type: String
+  AdminIPAddress:
+    Type: String
 
   VpcCIDR:
     Default: 10.0.0.0/16
