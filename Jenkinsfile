@@ -7,7 +7,7 @@ pipeline {
                 sh "aws --version"
                 sh "cfn_nag_scan  --version"
                 sh "python3 /sqlmap/sqlmap.py"
-                sh "perl /nikto/nikto-master/program/nikto.pl"
+                // sh "perl /nikto/nikto-master/program/nikto.pl"
             }
         }
         stage('Static Analysis') {
